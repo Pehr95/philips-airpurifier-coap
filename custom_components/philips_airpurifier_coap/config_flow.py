@@ -73,12 +73,12 @@ class PhilipsAirPurifierConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             timeout = TimeoutManager()
 
             # try for 30s to get a valid client
-            async with timeout.async_timeout(30):
+            async with timeout.async_timeout(180):
                 client = await CoAPClient.create(self._host)
                 _LOGGER.debug(f"got a valid client for host {self._host}")
 
             # we give it 30s to get a status, otherwise we abort
-            async with timeout.async_timeout(30):
+            async with timeout.async_timeout(180):
                 _LOGGER.debug(f"trying to get status")
                 status, _ = await client.get_status()
                 _LOGGER.debug("got status")
@@ -194,12 +194,12 @@ class PhilipsAirPurifierConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     timeout = TimeoutManager()
 
                     # try for 30s to get a valid client
-                    async with timeout.async_timeout(30):
+                    async with timeout.async_timeout(180):
                         client = await CoAPClient.create(self._host)
                         _LOGGER.debug("got a valid client")
 
                     # we give it 30s to get a status, otherwise we abort
-                    async with timeout.async_timeout(30):
+                    async with timeout.async_timeout(180):
                         _LOGGER.debug(f"trying to get status")
                         status, _ = await client.get_status()
                         _LOGGER.debug("got status")
